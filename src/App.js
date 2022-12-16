@@ -31,29 +31,33 @@ function App() {
     console.log("hit2");
     console.log("length: " + localStorage.length)
     if(localStorage.length > 1){
-      console.log("Hit")
       setList(localStorage.getItem("movie"))
     }
-    
   },[])
   
 
   const addMovieToList = (event,title)=> {
     console.log(title);
-    setList(title);
-    localStorage.setItem('movie',title)
+    setList(oldArray=>[...oldArray,title]);
+    localStorage.setItem('movie',list)
+    console.log(list);
   }
 
   return (
+    
       <div id="app">
-        <div id="siteHeader">
-          <p>MovieList</p>
+        <div id="mainScene">
+          <div id="siteHeader">
+            <p>MovieList</p>
+          </div>
+          <div>Your lists: {list}</div>
+          <div><input type="text" onKeyDown={searchMovieWithId}></input></div>
+          <div>{movieData.map((movie,index)=>(<div id="searchedMovies">{"Title: " + movie.original_title + " Release year: " + movie.release_date + " Popularity: " + movie.popularity} <button onClick={event => addMovieToList(event,movie.original_title)}>Add to List</button></div>))}</div>
         </div>
-        <div id="catFact-header">CatFact</div>
-        <div id="catFact">{catFact}</div>
-        <div>Your list: {list}</div>
-        <div><input type="text" onKeyDown={searchMovieWithId}></input></div>
-        <div>{movieData.map((movie,index)=>(<div id="searchedMovies">{"Title: " + movie.original_title + " Release year: " + movie.release_date + " Popularity: " + movie.popularity} <button onClick={event => addMovieToList(event,movie.original_title)}>Add to List</button></div>))}</div>
+       
+        <div>
+          <div id="catFact"><div>CatFact</div><div>{catFact}</div></div>
+        </div>
       </div>
   );
 }
