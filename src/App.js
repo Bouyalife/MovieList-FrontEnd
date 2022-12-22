@@ -5,60 +5,52 @@ import react,{useEffect,useState} from 'react';
 
 function App() {
 
-  const [catFact, setCatFact] = useState("");
-  const [movieData,setMovieData] = useState([]);
-  const [list,setList] = useState([]);
-  
+  const [catFact,setCatFact] = useState("")
+  const [accountName,setAccountName] = useState("")
+  const [loggedIn,setLoggedIn] = useState(false)
+  const [allLists,setAllLists] = useState([])
+  const [username,setUsername] = useState("")
+  const [password,setPassword] = useState("")
+
   useEffect(()=>{
-      axios.get("http://localhost:8080/getcatfact").then(function(response){
-         setCatFact(JSON.stringify(response.data));
-      })
+    axios.get("http://localhost:8080/catfact").then(function(response){
+      setCatFact(JSON.stringify(response.data))
+    })
   },[])
 
-  
-  function searchMovieWithId(event){
-    if(event.key === 'Enter')
-    {
-      console.log("http://localhost:8080/getmovie?id=" + event.target.value);
-      axios.get("http://localhost:8080/getmovie?id=" + event.target.value).then(function(response){
-        console.log(response.data);
-        setMovieData(response.data.results);
-      })
-    }
-  }
-
-  useEffect(() =>{
-    console.log("hit2");
-    console.log("length: " + localStorage.length)
-    if(localStorage.length > 1){
-      setList(localStorage.getItem("movie"))
-    }
-  },[])
-  
-
-  const addMovieToList = (event,title)=> {
-    console.log(title);
-    setList(oldArray=>[...oldArray,title]);
-    localStorage.setItem('movie',list)
-    console.log(list);
+  function login(event){
+    console.log(username + " + " + password);
   }
 
   return (
-    
-      <div id="app">
-        <div id="mainScene">
-          <div id="siteHeader">
-            <p>MovieList</p>
-          </div>
-          <div>Your lists: {list}</div>
-          <div><input type="text" onKeyDown={searchMovieWithId}></input></div>
-          <div>{movieData.map((movie,index)=>(<div id="searchedMovies">{"Title: " + movie.original_title + " Release year: " + movie.release_date + " Popularity: " + movie.popularity} <button onClick={event => addMovieToList(event,movie.original_title)}>Add to List</button></div>))}</div>
-        </div>
-       
-        <div>
-          <div id="catFact"><div>CatFact</div><div>{catFact}</div></div>
-        </div>
+    <div id="site">
+      <div style={{display:"flex",justifyContent: "center",alignItems:"center"}}>
+        <div style={{flex: 1,backgroundColor: "#E76F51", height: "3px"}}/>
+        <div id="siteHeader">MovieList</div>
+        <div style={{flex: 1,backgroundColor: "#E76F51", height: "3px"}}/>
       </div>
+      
+      <div id="app">
+          {
+          // Inuti mainScene visas allt 
+          }
+          <div id ="mainScene">
+            <div id="login">{loggedIn ? <button>Log Out</button>:<div><input type="text" onChange={e=>setUsername(e.target.value)} placeholder="Username"/><input type="text" onChange={e=>setPassword(e.target.value)} placeholder="Password"/><button onClick={login}>Login</button></div>}</div>
+            <div id="login">{loggedIn ? accountName: "Login to see List!"}</div>
+            <div><button id="addnewlist">+</button></div>
+            <div>
+              {allLists.map((list,index)=>(
+                <div id="lists">list</div>
+              )
+            )}</div>
+          </div>
+          {
+          // CATFACT rutan
+          }
+          <div id="catFact"><div id="catFact-Header">Cat Fact!</div>{catFact}</div>
+      </div>
+    </div>
+     
   );
 }
 
