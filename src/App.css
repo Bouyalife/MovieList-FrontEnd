@@ -12,7 +12,7 @@
   height: fit-content;
 
   text-align: center;
-  box-shadow: 2px 2px 3px;
+  box-shadow: 1px 1px 5px 1px;
   margin-right: 5px;
   margin-top: 25%;
   margin-left:5%;
@@ -35,17 +35,16 @@
 
 #mainScene {
   background-color: #F4A261;
-  height: 96vh;
+  height: 85%;
   width: 55vw;
   border-radius: 125px;
-  box-shadow: 5px 10px 10px 3px;
+  box-shadow: 5px 10px 30px 2px;
   padding: 100px;
 }
 
 #app{
   display:grid;
-  grid-template-columns:1fr 1fr;
-  margin-left:15%;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
 #lists{
@@ -57,13 +56,72 @@
 }
 
 #site {
+  min-height: 100vh;
   background-color: #329589;
 }
 
+#searchBar{
+  width: 500px;
+  height: 20px;
+  border-radius:10px;
+  border-style:double;
+}
+
+#search{
+  margin-top: -50px;
+  position: absolute;
+  z-index: 1;
+  right: 38%;
+}
+
+#titleSearches{
+  display:block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-right:25px;
+  width: 80%;
+  outline: 1px solid black;
+  background-color: aliceblue;
+  text-align: center;
+  box-shadow: 1px 2px 2px 1px;
+  cursor: pointer;
+}
+
+#lists{
+  margin-top: 50px;
+  margin:auto;
+
+}
+
+#eachlist{
+  box-shadow: 1px 2px 6px 1px #1a6159;
+  margin-top: 15px;
+  width: 50%;
+  margin-left:auto;
+  margin-right: auto;
+
+}
+
+#addnewlistbutton{
+ margin-left: 5%;
+ margin-top: 60vh;
+}
+
 #addnewlist{
-  
-  margin-top: 75px;
-  width: 5%;
-  border-width: 1px;
+  font-size: 25px;
+  font-style:oblique;
+  position:fixed;
+  width: 4%;
+  height: 7%;
+  border-radius: 25px;
+  background-color: #E76F51;
+}
+#removeMovieFromList{
+  border: none;
+  background-color: red;
   border-radius: 10px;
+  width:30px;
+  margin-left: 30px;
 }
